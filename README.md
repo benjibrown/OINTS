@@ -1,12 +1,8 @@
----
-pinned: true
-tags: [Import-850a]
-title: O.I.N.T.S - Open-source Intelligence N' Techical Sh⁎⁎t
-created: '2022-12-04T14:13:00.681Z'
-modified: '2022-12-05T19:54:02.870Z'
----
+
 
 # O.I.N.T.S - Open-source Intelligence N' Techical Sh**t
+
+![ConsoleScreenshot](https://raw.githubusercontent.com/benjibrown/OINTS/main/resources/console.png)
  
  OINTS is a tool that utilizes many api's and small scripts to gather intelligence on a target passively and actively.
  
