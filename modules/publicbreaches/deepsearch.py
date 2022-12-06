@@ -25,7 +25,21 @@ class deepSearch(Module):
             "Must be an IP, Email, Password, Username, Name or UID",
             True,
         ): str("example@example.com"),
+        Option(
+            'PHPSESSID',
+            "Must be a valid PHP session ID, collect from DeepSearch website after logging in",
+            True,
+        ): str("bmljZSBqb2Igb24gZmluZGluZyB0aGlzIQ"),
     })    
+    def query(self):
+        type = self.config.option('TYPE').value
+        target = self.config.option('TARGET').value
+        answer = input.ask(f"{prefix} Do you want to continue with {target} as your {type} of choice? (y/n) ")
+        if answer == "y":
+            return
+        else:
+            print(f'{prefix} Exiting....See ya!')
+            return None
 
     def run(self):
         type = self.config.option('TYPE').value
@@ -36,19 +50,4 @@ class deepSearch(Module):
             if not EMAIL_REGEX.match(target):
                 print(f'{prefix} Please provide a valid email!')
                 return None
-            answer2 = input.ask(f"{prefix} Do you want to continue with {target} as your email of choice? (y/n) ")
-            if answer2 == "y":
-                # do function here or define in outside of this function
-                print("")
-            else:
-                print(f'Exiting....See ya!')       
-                return None
-        elif type == "password":
-            answer2 = input.ask(f"{prefix} Do you want to continue with {target} as your password of choice? (y/n) ")
-            if answer2 == "y":
-                # do function here or define in outside of this function
-                print("")
-            else:
-                print(f'Exiting....See ya!')       
-                return None
-        
+        self.query()
