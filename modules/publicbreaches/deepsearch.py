@@ -30,6 +30,16 @@ class deepSearch(Module):
             "Must be a valid PHP session ID, collect from DeepSearch website after logging in",
             True,
         ): str("bmljZSBqb2Igb24gZmluZGluZyB0aGlzIQ"),
+        Option(
+            'TOR_PORT',
+            "Port in which Tor instance is running",
+            True,
+        ): str("9050"),
+        Option(
+            'TOR_HOST',
+            "Host in which Tor instance is running",
+            True,
+        ): str("127.0.0.1"),
     })    
     def query(self):
         type = self.config.option('TYPE').value
