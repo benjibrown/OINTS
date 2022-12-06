@@ -1,7 +1,7 @@
 from sploitkit import Module, Config, Option, Command
 import requests
 
-class dnsHost(Module):
+class test(Module):
     # Command.set_style("module")
     """ Test module
     Author: benjibrown
