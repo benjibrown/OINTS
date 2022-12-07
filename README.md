@@ -9,7 +9,9 @@
  If you like this project please consider leaving a star :)
  
  Much like **recon-ng** but spaghetti code, unstable, built on `sploitkit` and botched :)
-
+## Modules
+> Small list of some modules
+- DeepSearch Scraper
 ## What is OSINT?
 
 OSINT stands for open source intelligence, which refers to any information that can legally be gathered from free, public sources about an individual or organization. 
@@ -32,7 +34,9 @@ To install on linux run the following commands:
 git clone https://github.com/benjibrown/OINTS.git
 cd OINTS
 pip3 install -r requirements.txt
-sudo mv oints /usr/bin/
+# Make sure to change path to path where OINTS is located
+# Add this to your .bashrc/.zshrc etc
+PATH=$PATH:~/{path-to-oints}
 ```
 Now you can simply run `oints` to start well O.I.N.T.S!
 
