@@ -59,7 +59,7 @@ class deepSearch(Module):
     def query(self):
         #variables
         type = self.config.option('TYPE').value.lower()
-        target = self.config.option('TARGET').value.lower()
+        target = self.config.option('TARGET').value
         tor_port = self.config.option('TOR_PORT').value
         tor_host = self.config.option('TOR_HOST').value
         # query
@@ -105,7 +105,7 @@ class deepSearch(Module):
     def run(self):
         #variables
         type = self.config.option('TYPE').value.lower()
-        target = self.config.option('TARGET').value.lower()
+        target = self.config.option('TARGET').value
         tor_port = self.config.option('TOR_PORT').value
         tor_host = self.config.option('TOR_HOST').value
         phpsessid = self.config.option('PHPSESSID').value.lower()
