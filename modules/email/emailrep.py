@@ -52,9 +52,9 @@ class emailRep(Module):
                 if key == "details":
                     ff = jsonresp["details"]
                     for key,value in ff.items():
-                        print(f"{prefix3} {key}: {value}")
+                        print(f"{prefix3} {key.title()}: {value}")
                     return None
-                print(f"{prefix3} {key}: {value}")
+                print(f"{prefix3} {key.title()}: {value}")
         elif raw == "y":
             print(jsonresp)
         else:
