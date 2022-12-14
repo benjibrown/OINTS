@@ -18,15 +18,14 @@ Launches OINTS!
 if __name__ == '__main__':
     parser.add_argument("-d", "--dev", action="store_true", help="enable development mode")
     initialize(exit_at_interrupt=False)
-    
-    #add traceback   
+
     sys.tracebacklimit=0
 
     sys.dont_write_bytecode = True
 
     c = OINTS(
         "OINTS",
-        #TODO: configure your console settings
+
         banner_section_styles={'title': {'fgcolor': "lolcat"}},
         dev=args.dev,
         debug=args.verbose,
