@@ -67,8 +67,7 @@ class deepSearch(Module):
         if answer == "y":
             return
         else:
-            print(f'{prefix2} Exiting....See ya!')
-            return None
+            raise Exception("Exiting...See ya!")
     def search(self):
         #variables
         search = self.config.option('TARGET').value
@@ -112,23 +111,24 @@ class deepSearch(Module):
         # validate input
         if type not in types:
             print(f'{prefix2} Please provide a valid TYPE!')
+            raise Exception("Exiting...See ya!")
         if type == "email":
             if not EMAIL_REGEX.match(target):
                 print(f'{prefix2} Please provide a valid email!')
-                return None
+                raise Exception("Exiting...See ya!")
         if type == "ip":
             if not IP_REGEX.match(target):
                 print(f'{prefix2} Please provide a valid IP!')
-                return None
+                raise Exception("Exiting...See ya!")
         if tor_port >= 65535 or tor_port <= 0:
             print(f'{prefix2} Please provide a valid TOR PORT!')
-            return None
+            raise Exception("Exiting...See ya!")
         if not IP_REGEX.match(tor_host):
             print(f'{prefix2} Please provide a valid TOR HOST!')
-            return None
+            raise Exception("Exiting...See ya!")
         if phpsessid == "bmljZSBqb2Igb24gZmluZGluZyB0aGlzIQ":
             print(f'{prefix2} Please provide a PHPSESSID - You selected the example one!')
-            return None
+            raise Exception("Exiting...See ya!")
             
         self.query()
         #init session

@@ -2,6 +2,7 @@ from sploitkit import Module, Config, Option, Command
 import requests
 import re
 import time
+import sys
 from rich import print
 from rich.prompt import Prompt as input
 timestamp = time.strftime('%H:%M:%S')
@@ -37,8 +38,7 @@ class emailRep(Module):
         if answer == "y":
             return
         else:
-            print(f'{prefix2} Exiting....See ya!')
-            return None
+            raise Exception("Exiting...See ya!")
     def search(self):
         #variables
         email = self.config.option('EMAIL').value
@@ -59,13 +59,13 @@ class emailRep(Module):
             print(jsonresp)
         else:
             print(f"{prefix2} Invalid raw value! Exiting....See ya!")
-            return None
+            raise Exception("Exiting...See ya!")
 
     def run(self):
         email = self.config.option('EMAIL').value
         if not EMAIL_REGEX.match(email):
             print(f'{prefix2} Please provide a valid email!')
-            return None
+            raise Exception("Exiting...See ya!")
         self.query()
         self.search()
         

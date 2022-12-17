@@ -35,11 +35,8 @@ To install on linux run the following commands:
 git clone https://github.com/benjibrown/OINTS.git
 cd OINTS
 pip3 install -r requirements.txt
-# Make sure to change path to path where OINTS is located
-# Add this to your .bashrc/.zshrc etc
-PATH=$PATH:~/{path-to-oints}
+python3 oints
 ```
-Now you can simply run `oints` to start well O.I.N.T.S!
 
 ## Contributing
 
