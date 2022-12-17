@@ -1,0 +1,5 @@
+requests
+sploitkit
+rich
+bs4
+re
