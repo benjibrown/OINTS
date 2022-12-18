@@ -3,7 +3,7 @@
 # O.I.N.T.S - Open-source Intelligence N' Techical Sh**t
 
 ![ConsoleScreenshot](https://raw.githubusercontent.com/benjibrown/OINTS/main/resources/console.png)
- 
+ > Project for my DofE skills section
  OINTS is a tool that utilizes many api's and small scripts to gather intelligence on a target passively and actively.
  
  If you like this project please consider leaving a star :)
