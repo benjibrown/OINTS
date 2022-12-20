@@ -15,6 +15,8 @@
 > Small list of some modules
 - DeepSearch Scraper
 - EmailRep.io Wrapper
+- Cert.sh Subdomain Finder
+- Photon Web Crawler
 ## What is OSINT?
 
 OSINT stands for open source intelligence, which refers to any information that can legally be gathered from free, public sources about an individual or organization. 
