@@ -18,6 +18,53 @@ prefix2 = "[bold red][[/bold red]![bold red]][/bold red]"
 prefix3 = f"[bold red][[/bold red]{timestamp}[bold red]][/bold red]"
 EMAIL_REGEX = re.compile(r"[^@]+@[^@]+\.[^@]+")
 IP_REGEX = re.compile(r"^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}$")
+def query():
+    #variables
+    type = deepSearch.config.get('TYPE').lower()
+    target = deepSearch.config.get('TARGET')
+    tor_port = deepSearch.config.get('TOR_PORT')
+    tor_host = deepSearch.config.get('TOR_HOST')
+    tor_port = int(tor_port)
+    # query
+    answer = input.ask(f"{prefix2} Do you want to continue with {target} as your {type} of choice and {tor_port}, {tor_host} as your TOR config? (y/n) ")
+    if answer == "y":
+        return
+    else:
+        raise Exception("Exiting...See ya!")
+def search():
+    #variables
+    search = deepSearch.config.get('TARGET')
+    search_type = deepSearch.config.get('TYPE')
+    phpsessid = deepSearch.config.get('PHPSESSID')
+    uri = deepSearch.config.get('DEEPSEARCH_URI')
+    tor_host = deepSearch.config.get('TOR_HOST')
+    tor_port = deepSearch.config.get('TOR_PORT')
+    tor_port = int(tor_port)
+    session = requests.session()
+    #set proxies
+    session.proxies = {'http': f'socks5h://{tor_host}:{tor_port}', 'https': f'socks5h://{tor_host}:{tor_port}'}
+    # send request
+    print(f"{prefix3} Scraping data.....")
+    request_data = {'search': search, 'dropdownn': search_type, 'tsearchv': 'match'}
+    response = session.post(uri, data=request_data, cookies={'PHPSESSID':phpsessid})
+    # run parsing function
+    print(f"{prefix3} Parsing response.....")
+    html = response.text
+    soup = BeautifulSoup(html, "lxml")
+
+    td = soup.find_all('td')
+
+    i = 0
+    while i < len(td):
+        first_item  = td[i].getText()
+        second_item = td[i+1].getText()  
+        
+        if '/20' in first_item:
+            print("---------------------------------------------------")
+        
+        print(f"{prefix3} {first_item}:\t {second_item}")
+        i += 2
+    return None
 class deepSearch(Module):
     # Command.set_style("module")
     """Deepsearch - Searches DeepSearch for given IP/Email/Password/Name/UID/Username
@@ -56,58 +103,14 @@ class deepSearch(Module):
             False,
         ): str("http://xjypo5vzgmo7jca6b322dnqbsdnp3amd24ybx26x5nxbusccjkm4pwid.onion/deepsearch"),
     })    
-    def query(self):
-        #variables
-        type = self.config.option('TYPE').value.lower()
-        target = self.config.option('TARGET').value
-        tor_port = self.config.option('TOR_PORT').value
-        tor_host = self.config.option('TOR_HOST').value
-        # query
-        answer = input.ask(f"{prefix2} Do you want to continue with {target} as your {type} of choice and {tor_port}, {tor_host} as your TOR config? (y/n) ")
-        if answer == "y":
-            return
-        else:
-            raise Exception("Exiting...See ya!")
-    def search(self):
-        #variables
-        search = self.config.option('TARGET').value
-        search_type = self.config.option('TYPE').value
-        phpsessid = self.config.option('PHPSESSID').value
-        uri = self.config.option('DEEPSEARCH_URI').value
-        tor_host = self.config.option('TOR_HOST').value
-        tor_port = self.config.option('TOR_PORT').value
-        session = requests.session()
-        #set proxies
-        session.proxies = {'http': f'socks5h://{tor_host}:{tor_port}', 'https': f'socks5h://{tor_host}:{tor_port}'}
-        # send request
-        print(f"{prefix3} Scraping data.....")
-        request_data = {'search': search, 'dropdownn': search_type, 'tsearchv': 'match'}
-        response = session.post(uri, data=request_data, cookies={'PHPSESSID':phpsessid})
-        # run parsing function
-        print(f"{prefix3} Parsing response.....")
-        html = response.text
-        soup = BeautifulSoup(html, "lxml")
-
-        td = soup.find_all('td')
-
-        i = 0
-        while i < len(td):
-            first_item  = td[i].getText()
-            second_item = td[i+1].getText()  
-            
-            if '/20' in first_item:
-                print("---------------------------------------------------")
-            
-            print(f"{prefix3} {first_item}:\t {second_item}")
-            i += 2
-        return None
     def run(self):
         #variables
-        type = self.config.option('TYPE').value.lower()
-        target = self.config.option('TARGET').value
-        tor_port = self.config.option('TOR_PORT').value
-        tor_host = self.config.option('TOR_HOST').value
-        phpsessid = self.config.option('PHPSESSID').value.lower()
+        type = deepSearch.config.get('TYPE')
+        target = deepSearch.config.get('TARGET')
+        tor_port = deepSearch.config.get('TOR_PORT')
+        tor_host = deepSearch.config.get('TOR_HOST')
+        phpsessid = deepSearch.config.get('PHPSESSID')
+        tor_port = int(tor_port)
         # validate input
         if type not in types:
             print(f'{prefix2} Please provide a valid TYPE!')
@@ -129,9 +132,7 @@ class deepSearch(Module):
         if phpsessid == "bmljZSBqb2Igb24gZmluZGluZyB0aGlzIQ":
             print(f'{prefix2} Please provide a PHPSESSID - You selected the example one!')
             raise Exception("Exiting...See ya!")
-            
-        self.query()
-        #init session
-
+        # query user
+        query()
         # run search function
-        self.search()
+        search()
