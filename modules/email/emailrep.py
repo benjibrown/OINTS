@@ -61,15 +61,12 @@ class emailRep(Module):
     #         raise Exception("Exiting...See ya!")
 
     def run(self):
-        email = self.config.option('EMAIL')
-        raw = self.config.option('RAW').lower()
-        if not EMAIL_REGEX.match(email):
-            print(f'{prefix2} Please provide a valid email!')
-            raise Exception("Exiting...See ya!")
+        email = self.config.option('EMAIL').value
+        raw = self.config.option('RAW').value
         self.query()
         r = requests.get(f"https://emailrep.io/{email}")
         jsonresp = r.json()
-        if raw == "n":
+        if "n" in raw:
             if "fail" and "reason" in jsonresp:
                 print(f'{prefix3} You have been ratelimited by the API!')
             for key,value in jsonresp.items():
@@ -79,7 +76,7 @@ class emailRep(Module):
                         print(f"{prefix3} {key.title()}: {value}")
                     return None
                 print(f"{prefix3} {key.title()}: {value}")
-        elif raw == "y":
+        elif "y" in raw:
             print(jsonresp)
         else:
             print(f"{prefix2} Invalid raw value! Exiting....See ya!")
