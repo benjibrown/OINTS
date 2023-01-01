@@ -41,6 +41,14 @@ cd OINTS
 pip3 install -r requirements.txt
 python3 oints
 ```
+## FAQ
+
+### Why is `setuptools.extern` not found?
+		This is due to your version of setuptools being too up to date. 
+		It is recommended you downgrade to version `64.0.3` with the command:
+		```bash
+		pip3 install setuptools=64.0.3
+		```
 
 ## Contributing
 
