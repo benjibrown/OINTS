@@ -40,7 +40,7 @@ git clone https://github.com/benjibrown/OINTS.git
 cd OINTS
 pip3 install -r requirements.txt
 python3 oints
-```
+``
 ## FAQ
 
 ### Why is `setuptools.extern` not found?
